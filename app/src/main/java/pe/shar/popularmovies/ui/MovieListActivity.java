@@ -15,7 +15,6 @@ import pe.shar.popularmovies.data.Movie;
 
 public class MovieListActivity extends AppCompatActivity implements MoviesAdapter.MovieAdapterOnClickHandler {
 
-    private static final String TAG = MovieListActivity.class.getSimpleName();
     private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
     @BindView(R.id.toolbar)
