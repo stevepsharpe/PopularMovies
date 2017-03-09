@@ -159,7 +159,7 @@ public class MovieListFragment extends Fragment {
             swipeRefreshLayout.setRefreshing(true);
         }
 
-        Call<Movie.Response> call = mClient.getMovies(mSort, page);
+        Call<Movie.Response> call = mSort.equals(SORT_TOP_MOVIES) ? mClient.getTopMovies(page) : mClient.getPopularMovies(page);
         call.enqueue(new Callback<Movie.Response>() {
             @Override
             public void onResponse(Call<Movie.Response> call, Response<Movie.Response> response) {

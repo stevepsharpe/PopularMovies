@@ -12,9 +12,13 @@ import retrofit2.http.Query;
 
 public interface TMDBApiClient {
 
-    @GET("/3/discover/movie")
-    Call<Movie.Response> getMovies(
-            @Query("sort_by") String sort_by,
+    @GET("/3/movie/popular")
+    Call<Movie.Response> getPopularMovies(
+            @Query("page") int page
+    );
+
+    @GET("/3/movie/top_rated")
+    Call<Movie.Response> getTopMovies(
             @Query("page") int page
     );
 
