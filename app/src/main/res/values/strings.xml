@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="title_activity_movie_list">Popular Movies</string>
+
+    <string name="action_popular">Most Popular</string>
+    <string name="action_top_rated">Highest Rated</string>
+
+    <string name="overview">Overview</string>
+
+    <string name="content_description_movie_backdrop">Movie Backdrop</string>
+    <string name="content_description_movie_poster">Movie Poster</string>
+
+    <string name="placeholder_movie_overview">In 1926, Newt Scamander arrives at the Magical Congress of the United States of America with a magically expanded briefcase, which houses a number of dangerous creatures and their habitats. When the creatures escape from the briefcase, it sends the American wizarding authorities after Newt, and threatens to strain even further the state of magical and non-magical relations.</string>
+</resources>
