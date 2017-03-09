@@ -21,7 +21,6 @@ import pe.shar.popularmovies.data.Movie;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    private static final String TAG = "MovieDetailActivity";
     private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
     public static final String IMG_BASE_URL = "https://image.tmdb.org/t/p/";
     public static final String POSTER_IMG_SIZE = "w500";
