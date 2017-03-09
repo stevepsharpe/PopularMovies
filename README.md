@@ -2,7 +2,7 @@
 
 This is for Stage 1 of the Udacity [Associate Android Developer Fast Track Program][1].
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a2cb2f7ab58b42ada8ccef76ca56613b)](https://www.codacy.com/app/stevepsharpe_2/PopularMovies?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stevepsharpe/PopularMovies&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/160f22e712bc413ab1ecd756b9fd61c5)](https://www.codacy.com/app/stevepsharpe/PopularMovies?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stevepsharpe/PopularMovies&amp;utm_campaign=Badge_Grade) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### API Key
 
