@@ -1,9 +1,9 @@
 package pe.shar.popularmovies.ui;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -28,7 +28,7 @@ public class MovieListActivity extends AppCompatActivity implements MoviesAdapte
 
         if (savedInstanceState == null) {
             MovieListFragment movieListFragment = new MovieListFragment();
-            FragmentManager manager = getFragmentManager();
+            FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.movies_container, movieListFragment, "movieListFragment");
             transaction.commit();

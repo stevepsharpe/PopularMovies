@@ -29,6 +29,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MovieListActivity" />
         </activity>
+
+        <provider
+            android:authorities="pe.shar.popularmovies"
+            android:name="pe.shar.popularmovies.data.MoviesProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

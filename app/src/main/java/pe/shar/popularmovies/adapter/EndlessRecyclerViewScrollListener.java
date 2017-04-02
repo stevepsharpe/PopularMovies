@@ -4,13 +4,18 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 
 /**
  * Created by steve on 05/03/2017.
+ * https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
  * https://gist.githubusercontent.com/nesquena/d09dc68ff07e845cc622/raw/4b8c85a0c15846adc51cbde54b220a454afb40cb/EndlessRecyclerViewScrollListener.java
  */
 
 public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+
+    private static final String TAG = EndlessRecyclerViewScrollListener.class.getSimpleName();
+
     // The minimum amount of items to have below your current scroll position
     // before loading more.
     private int visibleThreshold = 5;
@@ -57,6 +62,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
     public void onScrolled(RecyclerView view, int dx, int dy) {
         int lastVisibleItemPosition = 0;
         int totalItemCount = mLayoutManager.getItemCount();
+        this.currentPage = Math.round(totalItemCount /  20);
 
         if (mLayoutManager instanceof StaggeredGridLayoutManager) {
             int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager).findLastVisibleItemPositions(null);
@@ -67,6 +73,10 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
         } else if (mLayoutManager instanceof GridLayoutManager) {
             lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager).findLastVisibleItemPosition();
         }
+
+        Log.d(TAG, "onScrolled: totalItemCount " + totalItemCount);
+        Log.d(TAG, "onScrolled: lastVisibleItemPosition " + lastVisibleItemPosition);
+        Log.d(TAG, "onScrolled: currentPage " + currentPage);
 
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state

@@ -13,7 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServiceGenerator {
 
-    public static String apiBaseUrl = "https://api.themoviedb.org/";
+
+//    https://api.themoviedb.org/
+    public static String apiBaseUrl = "https://api-themoviedb-org-vwdlp0cwv3ss.runscope.net/";
     private static Retrofit retrofit;
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
