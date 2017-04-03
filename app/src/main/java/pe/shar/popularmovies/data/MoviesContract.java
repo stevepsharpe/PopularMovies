@@ -69,9 +69,20 @@ public class MoviesContract {
         public static final String CONTENT_TYPE =
                 "vnd.android.cursor.dir/vnd.popularmovies.favorite";
 
+        //        The MIME type of a single event
+        public static final String CONTENT_ITEM_TYPE =
+                "vnd.android.cursor.item/vnd.popularmovies.favorite";
+
         public static final String TABLE_NAME = "favorites";
 
         public static final String COLUMN_MOVIE_ID = "movie_id";
 
+        public static Uri buildFavoriteUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static long getIdFromUri(Uri uri) {
+            return ContentUris.parseId(uri);
+        }
     }
 }
