@@ -1,6 +1,8 @@
 package pe.shar.popularmovies.api;
 
 import pe.shar.popularmovies.data.Movie;
+import pe.shar.popularmovies.data.Review;
+import pe.shar.popularmovies.data.Video;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -12,18 +14,29 @@ import retrofit2.http.Query;
 
 public interface TMDBApiClient {
 
-    @GET("/3/movie/popular")
+    @GET("movie/popular")
     Call<Movie.Response> getPopularMovies(
             @Query("page") int page
     );
 
-    @GET("/3/movie/top_rated")
+    @GET("movie/top_rated")
     Call<Movie.Response> getTopMovies(
             @Query("page") int page
     );
 
-    @GET("/3/movie/{id}")
+    @GET("movie/{id}")
     Call<Movie> getMovie(
             @Path("id") String id
+    );
+
+    @GET("movie/{id}/videos")
+    Call<Video.Response> getMovieVideos(
+            @Path("id") long id
+    );
+
+    @GET("movie/{id}/reviews")
+    Call<Review.Response> getMovieReviews(
+            @Path("id") long id,
+            @Query("page") int page
     );
 }

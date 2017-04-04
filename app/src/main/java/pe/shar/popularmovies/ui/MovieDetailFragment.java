@@ -3,6 +3,7 @@ package pe.shar.popularmovies.ui;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,14 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pe.shar.popularmovies.R;
+import pe.shar.popularmovies.api.ServiceGenerator;
+import pe.shar.popularmovies.api.TMDBApiClient;
 import pe.shar.popularmovies.data.Movie;
+import pe.shar.popularmovies.data.Review;
+import pe.shar.popularmovies.data.Video;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by steve on 08/03/2017.
@@ -52,6 +60,8 @@ public class MovieDetailFragment extends Fragment {
     @BindView(R.id.vote_avg)
     TextView mVoteAvg;
 
+    private TMDBApiClient mClient;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +72,8 @@ public class MovieDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, view);
+
+        mClient = ServiceGenerator.createService(TMDBApiClient.class);
 
         if (mMovie != null) {
             mMovieTitle.setText(mMovie.getOriginalTitle());
@@ -90,6 +102,9 @@ public class MovieDetailFragment extends Fragment {
                         .fitCenter()
                         .into(mMoviePoster);
             }
+
+            loadVideos(mMovie.getId());
+            loadReviews(mMovie.getId(), 1);
         }
 
         return view;
@@ -101,5 +116,41 @@ public class MovieDetailFragment extends Fragment {
         } else {
             return String.format(Locale.getDefault(), "%.1f", average);
         }
+    }
+
+    public void loadVideos(long movieId) {
+        Call<Video.Response> call = mClient.getMovieVideos(movieId);
+        call.enqueue(new Callback<Video.Response>() {
+            @Override
+            public void onResponse(Call<Video.Response> call, Response<Video.Response> response) {
+                Video.Response videosResponse = response.body();
+
+                Log.d(TAG, "onResponse: " + videosResponse.videos);
+            }
+
+            @Override
+            public void onFailure(Call<Video.Response> call, Throwable t) {
+                Log.e(TAG, t.getMessage(), t);
+                Snackbar.make(getView(), "Error while fetching videos", Snackbar.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void loadReviews(long movieId, int page) {
+        Call<Review.Response> call = mClient.getMovieReviews(movieId, page);
+        call.enqueue(new Callback<Review.Response>() {
+            @Override
+            public void onResponse(Call<Review.Response> call, Response<Review.Response> response) {
+                Review.Response reviewsResponse = response.body();
+
+                Log.d(TAG, "onResponse: " + reviewsResponse.reviews);
+            }
+
+            @Override
+            public void onFailure(Call<Review.Response> call, Throwable t) {
+                Log.e(TAG, t.getMessage(), t);
+                Snackbar.make(getView(), "Error while fetching reviews", Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 }
