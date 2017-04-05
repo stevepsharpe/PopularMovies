@@ -2,6 +2,7 @@ package pe.shar.popularmovies.data;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -81,6 +82,11 @@ public class Video {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getUrl() {
+        String youtubeUrl = "https://www.youtube.com/watch?v=%s";
+        return String.format(youtubeUrl, getKey());
     }
 
     public static final class Response {

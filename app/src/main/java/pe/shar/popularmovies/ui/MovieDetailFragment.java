@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pe.shar.popularmovies.R;
+import pe.shar.popularmovies.adapter.VideosAdapter;
 import pe.shar.popularmovies.api.ServiceGenerator;
 import pe.shar.popularmovies.api.TMDBApiClient;
 import pe.shar.popularmovies.data.Movie;
@@ -60,6 +63,14 @@ public class MovieDetailFragment extends Fragment {
     @BindView(R.id.vote_avg)
     TextView mVoteAvg;
 
+    @BindView(R.id.videos_text_view)
+    TextView mVideosTextView;
+
+    @BindView(R.id.videos_recycler_view)
+    RecyclerView mVideosRecyclerView;
+
+    private LinearLayoutManager mLinearLayoutManager;
+    private VideosAdapter mVideosAdapter;
     private TMDBApiClient mClient;
 
     @Nullable
@@ -73,7 +84,12 @@ public class MovieDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, view);
 
+        mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mVideosAdapter = new VideosAdapter(getActivity(), null, (VideosAdapter.VideoAdapterOnClickHandler) getActivity());
         mClient = ServiceGenerator.createService(TMDBApiClient.class);
+
+        mVideosRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mVideosRecyclerView.setAdapter(mVideosAdapter);
 
         if (mMovie != null) {
             mMovieTitle.setText(mMovie.getOriginalTitle());
@@ -124,8 +140,15 @@ public class MovieDetailFragment extends Fragment {
             @Override
             public void onResponse(Call<Video.Response> call, Response<Video.Response> response) {
                 Video.Response videosResponse = response.body();
-
                 Log.d(TAG, "onResponse: " + videosResponse.videos);
+
+                // Don't take up any space if there aren't any videos
+                if (videosResponse.videos.size() == 0) {
+                    mVideosTextView.setVisibility(View.GONE);
+                    mVideosRecyclerView.setVisibility(View.GONE);
+                }
+
+                mVideosAdapter.setVideos(videosResponse.videos);
             }
 
             @Override

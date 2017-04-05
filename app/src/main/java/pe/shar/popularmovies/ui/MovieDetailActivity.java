@@ -2,6 +2,8 @@ package pe.shar.popularmovies.ui;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -22,10 +25,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pe.shar.popularmovies.R;
+import pe.shar.popularmovies.adapter.MoviesAdapter;
+import pe.shar.popularmovies.adapter.VideosAdapter;
 import pe.shar.popularmovies.data.FavoriteService;
 import pe.shar.popularmovies.data.Movie;
+import pe.shar.popularmovies.data.Video;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class MovieDetailActivity extends AppCompatActivity implements VideosAdapter.VideoAdapterOnClickHandler {
+
+    private static final String TAG = MovieDetailActivity.class.getSimpleName();
 
     private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
     public static final String IMG_BASE_URL = "https://image.tmdb.org/t/p/";
@@ -121,5 +129,12 @@ public class MovieDetailActivity extends AppCompatActivity {
             NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(Video video) {
+        Log.d(TAG, "onClick: ");
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(video.getUrl()));
+        startActivity(intent);
     }
 }

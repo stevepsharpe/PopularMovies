@@ -67,7 +67,7 @@ public class MovieListFragment extends Fragment implements LoaderManager.LoaderC
     @BindView(R.id.movies_swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @BindView(R.id.movies_recycler_view)
+    @BindView(R.id.videos_recycler_view)
     RecyclerView recyclerView;
 
     @Override

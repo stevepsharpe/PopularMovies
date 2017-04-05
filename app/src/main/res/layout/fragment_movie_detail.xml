@@ -31,6 +31,7 @@
                 android:id="@+id/movie_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
                 android:textAppearance="@android:style/TextAppearance.Large"
                 tools:text="Fantastic Beasts and Where to Find Them" />
 
@@ -56,6 +57,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
         android:text="@string/overview"
         android:textStyle="bold" />
 
@@ -63,8 +65,21 @@
         android:id="@+id/movie_overview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginBottom="@dimen/spacing_medium"
         android:textAppearance="@android:style/TextAppearance.Small"
         tools:text="@string/placeholder_movie_overview" />
+
+    <TextView
+        android:id="@+id/videos_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:text="@string/videos"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/videos_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
