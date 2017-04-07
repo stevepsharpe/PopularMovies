@@ -95,6 +95,11 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.VideoViewH
         return mVideos.size();
     }
 
+    public Video getShareableVideo() {
+        if (null == mVideos || mVideos.size() == 0) return null;
+        return mVideos.get(0);
+    }
+
     public void setVideos(List<Video> videos) {
         mVideos = videos;
         notifyDataSetChanged();
